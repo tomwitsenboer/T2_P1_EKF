@@ -63,6 +63,9 @@ public:
    * @param z The measurement at k+1
    */
   void UpdateEKF(const Eigen::VectorXd &z);
+  
+  // Additional function for faster computation  
+  void GenUpdateKF(const Eigen::VectorXd &y);
 
 };
 

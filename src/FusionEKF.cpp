@@ -83,8 +83,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
 	  //set the state with the initial location and zero velocity (from lecture 5-14)	
       ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0.0, 0.0;
-      cout << "x1_ = " << ekf_.x_ << endl;
-    }
+  }
 
     // done initializing, no need to predict or update
     is_initialized_ = true;
@@ -125,7 +124,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    */
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
-    // Radar updates
+     // Radar updates
     Hj_ = tools.CalculateJacobian(ekf_.x_);
 	ekf_.H_ = Hj_;
     ekf_.R_ = R_radar_;

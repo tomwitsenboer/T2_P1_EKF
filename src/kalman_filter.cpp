@@ -54,7 +54,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   h(0) = sqrt(x_(0)*x_(0)+x_(1)*x_(1));
   h(1) = atan2(x_(1),x_(0));
   // prevent div/o
-  if (h(0)) <= (0.000001){
+  if (h(0) < 0.000001) {
     h(0) = 0.000001;
   }
   h(2) = (x_(0)*x_(2) + x_(1) * x_(3))/h(0);

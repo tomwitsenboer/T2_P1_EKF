@@ -100,8 +100,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   ekf_.F_(1, 3) = dt;
 
   //set the acceleration noise components (from lecture 5-14)
-  noise_ax = 5;
-  noise_ay = 5;
+  double noise_ax = 5;
+  double noise_ay = 5;
 
   //set the process covariance matrix Q
   ekf_.Q_ = MatrixXd(4, 4);

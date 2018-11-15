@@ -46,7 +46,6 @@ void KalmanFilter::GenUpdateKF(const VectorXd &y) {
   MatrixXd I_ = MatrixXd::Identity(x_s, x_s); // Identity Matrix
   x_ = x_ + (K_ * y);
   P_ = (I_ - K_ * H_) * P_;
-  cout << "x = " << x_;
 }
 
 // Update EKF part  (lecture 5-21)

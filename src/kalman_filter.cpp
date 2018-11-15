@@ -28,7 +28,7 @@ void KalmanFilter::Predict() {
 
 // Update KF part from lecture 5-8
 void KalmanFilter::Update(const VectorXd &z) {
-  VectorXd y = z - H * x;
+  VectorXd y = z - H_ * x_;
 // Go to generic step KF+EKF update
   GenUpdateKF(y);
 }
@@ -58,7 +58,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   }
   h(2) = (x_(0)*x_(2) + x_(1) * x_(3))/h(0);
   //use h instead of H*x in K
-  VectorXd y = z - h; F
+  VectorXd y = z - h;
   //normalize angle to range -pi,pi (From: Tips and Tricks Project Description)
   y(1) = atan2(sin(y1),cos(y1));
   // Go to generic step KF + EKF update

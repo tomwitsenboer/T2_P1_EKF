@@ -7,6 +7,7 @@ using Eigen::VectorXd;
 // VectorXd or MatrixXd objects with zeros upon creation.
 
 KalmanFilter::KalmanFilter() {}
+
 KalmanFilter::~KalmanFilter() {}
 
 void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,

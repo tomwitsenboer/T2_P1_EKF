@@ -26,13 +26,6 @@ void KalmanFilter::Predict() {
   P_ = F_ * P_ * Ft_ + Q_; 
 }
 
-// Update KF part from lecture 5-8
-void KalmanFilter::Update(const VectorXd &z) {
-  VectorXd y = z - H_ * x_;
-// Go to generic step KF+EKF update
-  GenUpdateKF(y);
-}
-
 // Generic update step KF+EKF update (lecture 5-8 + 5-21)
 void KalmanFilter::GenUpdateKF(const VectorXd &y){
   MatrixXd Ht_ = H_.transpose();
@@ -46,6 +39,13 @@ void KalmanFilter::GenUpdateKF(const VectorXd &y){
   P_ = (I_ - K_ * H_) * P_;
 }
 
+// Update KF part from lecture 5-8
+void KalmanFilter::Update(const VectorXd &z) {
+  VectorXd y = z - H_ * x_;
+// Go to generic step KF+EKF update
+  GenUpdateKF(y);
+}
+
 // Update EKF part  (lecture 5-21)
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
   VectorXd h = VectorXd(3);
@@ -53,7 +53,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   h(0) = sqrt(x_(0)*x_(0)+x_(1)*x_(1));
   h(1) = atan2(x_(1),x_(0));
   // prevent div/o
-  if h(0)<0.000001){
+  if h(0)<(0.000001){
     h(0) = 0.000001;
   }
   h(2) = (x_(0)*x_(2) + x_(1) * x_(3))/h(0);

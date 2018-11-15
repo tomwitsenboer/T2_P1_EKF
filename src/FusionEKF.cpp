@@ -86,7 +86,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   }
 	
     MatrixXd Q_(4, 4);
-    ekf_.Init(x_, P, F, H_laser_, R_laser_, Q_);
+    ekf_.Init(ekf_.x_, ekf_.P_, ekf_.F_, H_laser_, R_laser_, Q_);
 	  
     // done initializing, no need to predict or update
     is_initialized_ = true;

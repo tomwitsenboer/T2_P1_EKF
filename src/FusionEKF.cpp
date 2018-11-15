@@ -13,7 +13,7 @@ using std::vector;
  */
 FusionEKF::FusionEKF() {
   is_initialized_ = false;
-  previous_timestamp_ = measurement_pack.timestamp_;
+  
   // initializing matrices
   R_laser_ = MatrixXd(2, 2);
   R_radar_ = MatrixXd(3, 3);
@@ -87,6 +87,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 	
     MatrixXd Q_(4, 4);
     ekf_.Init(ekf_.x_, ekf_.P_, ekf_.F_, H_laser_, R_laser_, Q_);
+    previous_timestamp_ = measurement_pack.timestamp_;
 	  
     // done initializing, no need to predict or update
     is_initialized_ = true;

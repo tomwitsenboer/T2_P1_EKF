@@ -42,6 +42,10 @@ FusionEKF::FusionEKF() {
   			0, 1, 0, 1,
   			0, 0, 1, 0,
   			0, 0, 0, 1;
+	
+  //set the acceleration noise components (from lecture 5-14)
+  noise_ax = 9.0;
+  noise_ay = 9.0;
 }
 
 /**
@@ -98,10 +102,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   //Modify the F matrix so that the time is integrated
   ekf_.F_(0, 2) = dt;
   ekf_.F_(1, 3) = dt;
-
-  //set the acceleration noise components (from lecture 5-14)
-  float noise_ax = 5;
-  float noise_ay = 5;
 
   //set the process covariance matrix Q
   ekf_.Q_ = MatrixXd(4, 4);
